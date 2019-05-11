@@ -44,6 +44,28 @@ func countPrimes(n int) int {
 	return count
 }
 
+func countPrimes2(n int) int {
+	if n < 3 {
+		return 0
+	}
+	var c int = n / 2
+	f := make([]bool, n, n) // false means prime
+	for i := 3; i < n; i += 2 {
+		if f[i] {
+			continue
+		}
+
+		for j := i*i; j < n; j += 2*i {
+			if !f[j] {
+				c--
+				f[j] = true
+			}
+		}
+	}
+	return c
+
+}
+
 func main() {
 	fmt.Println(countPrimes(1))
 	fmt.Println(countPrimes(2))
@@ -52,4 +74,12 @@ func main() {
 	fmt.Println(countPrimes(50))
 	fmt.Println(countPrimes(100))
 	fmt.Println(countPrimes(1000))
+
+	fmt.Println(countPrimes2(1))
+	fmt.Println(countPrimes2(2))
+	fmt.Println(countPrimes2(10))
+	fmt.Println(countPrimes2(20))
+	fmt.Println(countPrimes2(50))
+	fmt.Println(countPrimes2(100))
+	fmt.Println(countPrimes2(1000))
 }
